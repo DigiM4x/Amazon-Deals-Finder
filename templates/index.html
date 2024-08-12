@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Deals Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amazon Deals Finder</h1>
+        <form action="/search" method="get" target="_blank">
+            <div class="form-group">
+                <label for="query">Search Term</label>
+                <input type="text" id="query" name="query" required>
+            </div>
+            <div class="form-group">
+                <label for="min_price">Minimum Price</label>
+                <input type="number" id="min_price" name="min_price" step="0.01" min="0">
+            </div>
+            <div class="form-group">
+                <label for="max_price">Maximum Price</label>
+                <input type="number" id="max_price" name="max_price" step="0.01" min="0">
+            </div>
+            <div class="form-group">
+                <label for="discount_only">
+                    <input type="checkbox" id="discount_only" name="discount_only" value="true">
+                    Discounted Items Only
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="coupon_items">
+                    <input type="checkbox" id="coupon_items" name="coupon_items" value="true">
+                    Coupon Items Only
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

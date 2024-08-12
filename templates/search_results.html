@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .grid-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            color: #000;
+        }
+        .product-price {
+            font-size: 14px;
+            color: #555;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .promo-code {
+            font-size: 14px;
+            color: red;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results for "{{ query }}"</h1>
+    <div class="grid-container">
+        {% for product in products %}
+        <div class="grid-item">
+            <a href="{{ product.product_url }}" target="_blank">
+                <img class="product-image" src="{{ product.image_url }}" alt="{{ product.title }}">
+            </a>
+            <a class="product-title" href="{{ product.product_url }}" target="_blank">{{ product.title }}</a>
+            <div class="product-price">${{ product.price }}</div>
+            {% if product.promo_code %}
+            <span class="promo-code">Promo Code: {{ product.promo_code }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        {% if page > 1 %}
+            <a href="?query={{ query }}&min_price={{ request.args.get('min_price') }}&max_price={{ request.args.get('max_price') }}&discount_only={{ request.args.get('discount_only') }}&coupon_items={{ request.args.get('coupon_items') }}&page={{ page - 1 }}">Previous</a>
+        {% endif %}
+        {% if has_next_page %}
+            <a href="?query={{ query }}&min_price={{ request.args.get('min_price') }}&max_price={{ request.args.get('max_price') }}&discount_only={{ request.args.get('discount_only') }}&coupon_items={{ request.args.get('coupon_items') }}&page={{ page + 1 }}">Next</a>
+        {% endif %}
+    </div>
+</body>
+</html>
